@@ -15,9 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +37,9 @@ public final class QueryUtils {
      * Query the USGS dataset and return a list of {@link Earthquake} objects.
      */
     public static List<Earthquake> fetchEarthquakeData(String requestUrl) {
+        String msg = "fetch called";
+        Log.v("fetchEarthqData called ", msg);
+
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -95,13 +96,13 @@ public final class QueryUtils {
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
 
                 // Extract the value for the key called "mag"
-                double magnitude = properties.getDouble("mag");
+                Double magnitude = properties.getDouble("mag");
 
                 // Extract the value for the key called "place"
                 String location = properties.getString("place");
 
                 // Extract the value for the key called "time"
-                long time = properties.getLong("time");
+                Long time = properties.getLong("time");
 
                 // Extract the value for the key called "url"
                 String url = properties.getString("url");
